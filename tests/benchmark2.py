@@ -1,6 +1,6 @@
 # coding=UTF-8
 import simplejson
-import ujson
+import ultrajson
 import sys
 try:
     import json
@@ -29,14 +29,14 @@ def timeit_compat_fix(timeit):
         return timeit.Timer(stmt, setup, timer).repeat(repeat, number)
     timeit.repeat = repeat
 
-def ujsonDec():
-    x = ujson.loads(decodeData)
+def ultrajsonDec():
+    x = ultrajson.loads(decodeData)
 
 def simplejsonDec():
     x = simplejson.loads(decodeData)
     
-def ujsonEnc():
-    x = ujson.dumps(encodeData)
+def ultrajsonEnc():
+    x = ultrajson.dumps(encodeData)
 
 def simplejsonEnc():
     x = simplejson.dumps(encodeData)
@@ -56,9 +56,9 @@ f.close()
 encodeData = simplejson.loads(decodeData)
 
 # Decode 1 million times
-print "ujson decode      : %.05f calls/sec" % (COUNT / min(timeit.repeat("ujsonDec()", "from __main__ import ujsonDec", gettime,10, COUNT)), )
+print "ultrajson decode      : %.05f calls/sec" % (COUNT / min(timeit.repeat("ultrajsonDec()", "from __main__ import ultrajsonDec", gettime,10, COUNT)), )
 print "simplejson decode : %.05f calls/sec" % (COUNT / min(timeit.repeat("simplejsonDec()", "from __main__ import simplejsonDec", gettime,10, COUNT)), )
 
-print "ujson encode      : %.05f calls/sec" % (COUNT / min(timeit.repeat("ujsonEnc()", "from __main__ import ujsonEnc", gettime,10, COUNT)), )
+print "ultrajson encode      : %.05f calls/sec" % (COUNT / min(timeit.repeat("ultrajsonEnc()", "from __main__ import ultrajsonEnc", gettime,10, COUNT)), )
 print "simplejson encode : %.05f calls/sec" % (COUNT / min(timeit.repeat("simplejsonEnc()", "from __main__ import simplejsonEnc", gettime,10, COUNT)), )
 

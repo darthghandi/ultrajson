@@ -17,7 +17,7 @@ import datetime
 import calendar
 
 try:
-    from io import StringIO
+    from StringIO import StringIO
 except:
     from io import StringIO
 
@@ -76,7 +76,7 @@ class UltraJSONTests(unittest.TestCase):
         self.assertEqual('"\\u003cimg src=\'\\u0026amp;\'\\/\\u003e"', ultrajson.dumps("<img src='&amp;'/>", encode_html_chars=True))
 
     def test_doubleLongIssue(self):
-        sut = {'a': -4342969734183514}
+        sut = {u'a': -4342969734183514}
         encoded = json.dumps(sut)
         decoded = json.loads(encoded)
         self.assertEqual(sut, decoded)
@@ -85,7 +85,7 @@ class UltraJSONTests(unittest.TestCase):
         self.assertEqual(sut, decoded)
 
     def test_doubleLongDecimalIssue(self):
-        sut = {'a': -12345678901234.56789012}
+        sut = {u'a': -12345678901234.56789012}
         encoded = json.dumps(sut)
         decoded = json.loads(encoded)
         self.assertEqual(sut, decoded)
@@ -94,27 +94,27 @@ class UltraJSONTests(unittest.TestCase):
         self.assertEqual(sut, decoded)
 
     def test_encodeDecodeLongDecimal(self):
-        sut = {'a': -528656961.4399388}
+        sut = {u'a': -528656961.4399388}
         encoded = ultrajson.dumps(sut, double_precision=15)
         ultrajson.decode(encoded)
 
     def test_decimalDecodeTest(self):
-        sut = {'a': 4.56}
+        sut = {u'a': 4.56}
         encoded = ultrajson.encode(sut)
         decoded = ultrajson.decode(encoded)
         self.assertNotEqual(sut, decoded)
 
     def test_decimalDecodeTestPrecise(self):
-        sut = {'a': 4.56}
+        sut = {u'a': 4.56}
         encoded = ultrajson.encode(sut)
         decoded = ultrajson.decode(encoded, precise_float=True)
         self.assertEqual(sut, decoded)
 
     def test_encodeDictWithUnicodeKeys(self):
-        input = { "key1": "value1", "key1": "value1", "key1": "value1", "key1": "value1", "key1": "value1", "key1": "value1" }
+        input = { u"key1": u"value1", u"key1": u"value1", u"key1": u"value1", u"key1": u"value1", u"key1": u"value1", u"key1": u"value1" }
         output = ultrajson.encode(input)
 
-        input = { "بن": "value1", "بن": "value1", "بن": "value1", "بن": "value1", "بن": "value1", "بن": "value1", "بن": "value1" }
+        input = { u"بن": u"value1", u"بن": u"value1", u"بن": u"value1", u"بن": u"value1", u"بن": u"value1", u"بن": u"value1", u"بن": u"value1" }
         output = ultrajson.encode(input)
 
     def test_encodeDoubleConversion(self):
@@ -239,7 +239,7 @@ class UltraJSONTests(unittest.TestCase):
     # 16 bits) are represented as \UXXXXXXXX in python but should be encoded
     # as \uXXXX\uXXXX in json.
     def testEncodeUnicodeBMP(self):
-        s = '\U0001f42e\U0001f42e\U0001F42D\U0001F42D' # 🐮🐮🐭🐭
+        s = u'\U0001f42e\U0001f42e\U0001F42D\U0001F42D' # 🐮🐮🐭🐭
         encoded = ultrajson.dumps(s)
         encoded_json = json.dumps(s)
 		
@@ -266,7 +266,7 @@ class UltraJSONTests(unittest.TestCase):
         self.assertEqual(s, decoded)
 
     def testEncodeSymbols(self):
-        s = '\u273f\u2661\u273f' # ✿♡✿
+        s = u'\u273f\u2661\u273f' # ✿♡✿
         encoded = ultrajson.dumps(s)
         encoded_json = json.dumps(s)
         self.assertEqual(len(encoded), len(s) * 6 + 2) # 6 characters + quotes
@@ -381,7 +381,7 @@ class UltraJSONTests(unittest.TestCase):
         self.assertEqual(dec, json.loads(enc))
 
     def test_decodeFromUnicode(self):
-        input = "{\"obj\": 31337}"
+        input = u"{\"obj\": 31337}"
         dec1 = ultrajson.decode(input)
         dec2 = ultrajson.decode(str(input))
         self.assertEqual(dec1, dec2)
@@ -555,7 +555,7 @@ class UltraJSONTests(unittest.TestCase):
 
     def test_decodeBrokenDictKeyTypeLeakTest(self):
         input = '{{1337:""}}'
-        for x in range(1000):
+        for x in xrange(1000):
             try:
                 ultrajson.decode(input)
                 assert False, "Expected exception!"
@@ -566,7 +566,7 @@ class UltraJSONTests(unittest.TestCase):
 
     def test_decodeBrokenDictLeakTest(self):
         input = '{{"key":"}'
-        for x in range(1000):
+        for x in xrange(1000):
             try:
                 ultrajson.decode(input)
                 assert False, "Expected exception!"
@@ -577,7 +577,7 @@ class UltraJSONTests(unittest.TestCase):
 
     def test_decodeBrokenListLeakTest(self):
         input = '[[[true'
-        for x in range(1000):
+        for x in xrange(1000):
             try:
                 ultrajson.decode(input)
                 assert False, "Expected exception!"
@@ -645,7 +645,7 @@ class UltraJSONTests(unittest.TestCase):
         self.assertEqual(output, json.dumps(input))
         self.assertEqual(input, ultrajson.decode(output))
 
-        self.assertEqual('"  \\u0000\\r\\n "', ultrajson.dumps("  \u0000\r\n "))
+        self.assertEqual('"  \\u0000\\r\\n "', ultrajson.dumps(u"  \u0000\r\n "))
 
     def test_decodeNullCharacter(self):
         input = "\"31337 \\u0000 31337\""
@@ -662,8 +662,8 @@ class UltraJSONTests(unittest.TestCase):
         input = [18446744073709551615, 18446744073709551615, 18446744073709551615]
         output = ultrajson.encode(input)
 
-        self.assertEqual(input, json.loads(output))
-        self.assertEqual(input, ultrajson.decode(output))
+        self.assertEquals(input, json.loads(output))
+        self.assertEquals(input, ultrajson.decode(output))
 
     def test_encodeLongConversion(self):
         input = 9223372036854775807
@@ -676,9 +676,9 @@ class UltraJSONTests(unittest.TestCase):
         input = 18446744073709551615
         output = ultrajson.encode(input)
 
-        self.assertEqual(input, json.loads(output))
-        self.assertEqual(output, json.dumps(input))
-        self.assertEqual(input, ultrajson.decode(output))
+        self.assertEquals(input, json.loads(output))
+        self.assertEquals(output, json.dumps(input))
+        self.assertEquals(input, ultrajson.decode(output))
 
     def test_numericIntExp(self):
         input = "1337E40"
@@ -779,7 +779,7 @@ class UltraJSONTests(unittest.TestCase):
             assert False, "expected OverflowError"
 
     def test_encodeNumericOverflowNested(self):
-        for n in range(0, 100):
+        for n in xrange(0, 100):
             class Nested:
                 x = 12839128391289382193812939
 
@@ -808,18 +808,18 @@ class UltraJSONTests(unittest.TestCase):
             self.assertEqual(ultrajson.decode(doc)['id'], result)
 
     def test_encodeBigEscape(self):
-        for x in range(10):
+        for x in xrange(10):
             if PY3:
-                base = '\\u00e5'.encode('utf-8')
+                base = '\u00e5'.encode('utf-8')
             else:
                 base = "\xc3\xa5"
             input = base * 1024 * 1024 * 2
             output = ultrajson.encode(input)
 
     def test_decodeBigEscape(self):
-        for x in range(10):
+        for x in xrange(10):
             if PY3:
-                base = '\\u00e5'.encode('utf-8')
+                base = '\u00e5'.encode('utf-8')
                 quote = "\"".encode()
             else:
                 base = "\xc3\xa5"
@@ -828,7 +828,7 @@ class UltraJSONTests(unittest.TestCase):
             output = ultrajson.decode(input)
 
     def test_toDict(self):
-        d = {"key": 31337}
+        d = {u"key": 31337}
 
         class DictTest:
             def toDict(self):
@@ -989,7 +989,7 @@ class UltraJSONTests(unittest.TestCase):
 
     def test_encodeBigSet(self):
         s = set()
-        for x in range(0, 100000):
+        for x in xrange(0, 100000):
             s.add(x)
         ultrajson.encode(s)
 
@@ -999,13 +999,13 @@ class UltraJSONTests(unittest.TestCase):
         except ImportError:
             return
 
-        b = blist(list(range(10)))
+        b = blist(range(10))
         c = ultrajson.dumps(b)
         d = ultrajson.loads(c)
 
         self.assertEqual(10, len(d))
 
-        for x in range(10):
+        for x in xrange(10):
             self.assertEqual(x, d[x])
 
     def test_encodeEmptySet(self):
@@ -1057,7 +1057,7 @@ class UltraJSONTests(unittest.TestCase):
 
     @unittest.skipIf(not PY3, "Only raises on Python 3")
     def test_encodingInvalidUnicodeCharacter(self):
-        s = "\\udc7f"
+        s = "\udc7f"
         self.assertRaises(UnicodeEncodeError, ultrajson.dumps, s)
 
     def test_sortKeys(self):
@@ -1072,15 +1072,15 @@ raise NotImplementedError("Implement this test!")
 
 
 def test_decodeStringUnicodeEscape(self):
-input = "\\u3131"
+input = "\u3131"
 raise NotImplementedError("Implement this test!")
 
 def test_decodeStringUnicodeBrokenEscape(self):
-input = "\\u3131"
+input = "\u3131"
 raise NotImplementedError("Implement this test!")
 
 def test_decodeStringUnicodeInvalidEscape(self):
-input = "\\u3131"
+input = "\u3131"
 raise NotImplementedError("Implement this test!")
 
 def test_decodeStringUTF8(self):

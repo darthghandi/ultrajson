@@ -5,9 +5,9 @@ UltraJSON
     
 UltraJSON is an ultra fast JSON encoder and decoder written in pure C with bindings for Python 2.5+ and 3.
 
-For a more painless day to day C/C++ JSON decoder experience please checkout ujson4c_, based on UltraJSON.
+For a more painless day to day C/C++ JSON decoder experience please checkout ultrajson4c_, based on UltraJSON.
 
-.. _ujson4c: http://github.com/esnme/ujson4c/
+.. _ultrajson4c: http://github.com/esnme/ultrajson4c/
 
 | Please checkout the rest of the projects in the Ultra series:
 | http://github.com/esnme/ultramemcache
@@ -15,17 +15,17 @@ For a more painless day to day C/C++ JSON decoder experience please checkout ujs
 
 To install it just run Pip as usual::
 
-    $ pip install ujson
+    $ pip install ultrajson
 
 ============
 Usage
 ============
 May be used as a drop in replacement for most other JSON parsers for Python::
 
-    >>> import ujson
-    >>> ujson.dumps([{"key": "value"}, 81, True])
+    >>> import ultrajson
+    >>> ultrajson.dumps([{"key": "value"}, 81, True])
     '[{"key":"value"},81,true]'
-    >>> ujson.loads("""[{"key": "value"}, 81, true]""")
+    >>> ultrajson.loads("""[{"key": "value"}, 81, true]""")
     [{u'key': u'value'}, 81, True]
     
 ~~~~~~~~~~~~~~~
@@ -35,47 +35,47 @@ encode_html_chars
 -----------------
 Used to enable special encoding of "unsafe" HTML characters into safer Unicode sequences. Default is false::
 
-    >>> ujson.dumps("<script>John&Doe", encode_html_chars=True)
+    >>> ultrajson.dumps("<script>John&Doe", encode_html_chars=True)
     '"\\u003cscript\\u003eJohn\\u0026Doe"'
 
 ensure_ascii
 -------------
 Limits output to ASCII and escapes all extended characters above 127. Default is true. If your end format supports UTF-8 setting this option to false is highly recommended to save space::
 
-    >>> ujson.dumps(u"\xe5\xe4\xf6")
+    >>> ultrajson.dumps(u"\xe5\xe4\xf6")
     '"\\u00e5\\u00e4\\u00f6"'
-    >>> ujson.dumps(u"\xe5\xe4\xf6", ensure_ascii=False)
+    >>> ultrajson.dumps(u"\xe5\xe4\xf6", ensure_ascii=False)
     '"\xc3\xa5\xc3\xa4\xc3\xb6"'
 
 double_precision
 ----------------
 Controls how many decimals to encode for double or decimal values. Default is 9::
 
-    >>> ujson.dumps(math.pi)
+    >>> ultrajson.dumps(math.pi)
     '3.1415926536'
-    >>> ujson.dumps(math.pi, double_precision=1)
+    >>> ultrajson.dumps(math.pi, double_precision=1)
     '3.1'
-    >>> ujson.dumps(math.pi, double_precision=0)
+    >>> ultrajson.dumps(math.pi, double_precision=0)
     '3'
-    >>> ujson.dumps(math.pi, double_precision=4)
+    >>> ultrajson.dumps(math.pi, double_precision=4)
     '3.1416'
 
 escape_forward_slashes
 ----------------------
 Controls whether forward slashes (``/``) are escaped. Default is True::
 
-    >>> ujson.dumps("http://esn.me")
+    >>> ultrajson.dumps("http://esn.me")
     '"http:\/\/esn.me"'
-    >>> ujson.dumps("http://esn.me", escape_forward_slashes=False)
+    >>> ultrajson.dumps("http://esn.me", escape_forward_slashes=False)
     '"http://esn.me"'
 
 indent
 ----------------------
 Controls whether indention ("pretty output") is enabled. Default is 0 (disabled)::
 
-    >>> ujson.dumps({"foo": "bar"})
+    >>> ultrajson.dumps({"foo": "bar"})
     '{"foo":"bar"}'
-    >>> ujson.dumps({"foo": "bar"}, indent=4)
+    >>> ultrajson.dumps({"foo": "bar"}, indent=4)
     {
         "foo":"bar"
     }
@@ -87,9 +87,9 @@ precise_float
 -------------
 Set to enable usage of higher precision (strtod) function when decoding string to double values. Default is to use fast but less precise builtin functionality::
 
-    >>> ujson.loads("4.56")
+    >>> ultrajson.loads("4.56")
     4.5600000000000005
-    >>> ujson.loads("4.56", precise_float=True)
+    >>> ultrajson.loads("4.56", precise_float=True)
     4.5599999999999996
 
     
@@ -107,7 +107,7 @@ Linux version 2.6.32-131.0.15.el6.x86_64
 Versions:
 ~~~~~~~~~
 
-- ujson: 1.21
+- ultrajson: 1.21
 - simplejson: 2.6.2
 - cjson: 1.05
 - yajl: 0.3.5
@@ -115,7 +115,7 @@ Versions:
 
 
 +-----------------------------------------+--------+------------+--------+---------+
-|                                         | ujson  | simplejson | cjson  | yajl    |
+|                                         | ultrajson  | simplejson | cjson  | yajl    |
 +=========================================+========+============+========+=========+
 | Array with 256 utf-8 strings            |        |            |        |         |
 +-----------------------------------------+--------+------------+--------+---------+

@@ -1,4 +1,4 @@
-PROGRAM=libujson.a
+PROGRAM=libultrajson.a
 CPP=gcc
 LIBS=-lm
 SOURCE=.

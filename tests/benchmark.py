@@ -1,6 +1,6 @@
 ﻿# coding=UTF-8
 import simplejson
-import ujson
+import ultrajson
 import sys
 try:
     import json
@@ -23,9 +23,9 @@ decodeData = ""
 
 """=========================================================================="""
 
-def ujsonEnc():
-    x = ujson.encode(testObject, ensure_ascii=False)
-    #print "ujsonEnc", x
+def ultrajsonEnc():
+    x = ultrajson.encode(testObject, ensure_ascii=False)
+    #print "ultrajsonEnc", x
 
 def simplejsonEnc():
     x = simplejson.dumps(testObject)
@@ -41,9 +41,9 @@ def yajlEnc():
 
 """=========================================================================="""
 
-def ujsonEncSorted():
-    x = ujson.encode(testObject, ensure_ascii=False, sort_keys=True)
-    #print "ujsonEnc", x
+def ultrajsonEncSorted():
+    x = ultrajson.encode(testObject, ensure_ascii=False, sort_keys=True)
+    #print "ultrajsonEnc", x
 
 def simplejsonEncSorted():
     x = simplejson.dumps(testObject, sort_keys=True)
@@ -59,9 +59,9 @@ def yajlEncSorted():
 
 """=========================================================================="""
 
-def ujsonDec():
-    x = ujson.decode(decodeData)
-    #print "ujsonDec: ", x
+def ultrajsonDec():
+    x = ultrajson.decode(decodeData)
+    #print "ultrajsonDec: ", x
 
 def simplejsonDec():
     x = simplejson.loads(decodeData)
@@ -109,14 +109,14 @@ for x in xrange(256):
     
 COUNT = 10000
 
-print "ujson encode      : %.05f calls/sec" % (COUNT / min(timeit.repeat("ujsonEnc()", "from __main__ import ujsonEnc", gettime,10, COUNT)), )
+print "ultrajson encode      : %.05f calls/sec" % (COUNT / min(timeit.repeat("ultrajsonEnc()", "from __main__ import ultrajsonEnc", gettime,10, COUNT)), )
 if not skip_lib_comparisons:
     print "simplejson encode : %.05f calls/sec" % (COUNT / min(timeit.repeat("simplejsonEnc()", "from __main__ import simplejsonEnc", gettime,10, COUNT)), )
     print "yajl  encode      : %.05f calls/sec" % (COUNT / min(timeit.repeat("yajlEnc()", "from __main__ import yajlEnc", gettime, 10, COUNT)), )
 
 decodeData = json.dumps(testObject)
 
-print "ujson decode      : %.05f calls/sec" % (COUNT / min(timeit.repeat("ujsonDec()", "from __main__ import ujsonDec", gettime,10, COUNT)), )
+print "ultrajson decode      : %.05f calls/sec" % (COUNT / min(timeit.repeat("ultrajsonDec()", "from __main__ import ultrajsonDec", gettime,10, COUNT)), )
 if not skip_lib_comparisons:
     print "simplejson decode : %.05f calls/sec" % (COUNT / min(timeit.repeat("simplejsonDec()", "from __main__ import simplejsonDec", gettime,10, COUNT)), )
     print "yajl decode       : %.05f calls/sec" % (COUNT / min(timeit.repeat("yajlDec()", "from __main__ import yajlDec", gettime,10, COUNT)), )
@@ -131,14 +131,14 @@ for x in xrange(256):
 COUNT = 2000
 
 
-print "ujson encode      : %.05f calls/sec" % (COUNT / min(timeit.repeat("ujsonEnc()", "from __main__ import ujsonEnc", gettime,10, COUNT)), )
+print "ultrajson encode      : %.05f calls/sec" % (COUNT / min(timeit.repeat("ultrajsonEnc()", "from __main__ import ultrajsonEnc", gettime,10, COUNT)), )
 if not skip_lib_comparisons:
     print "simplejson encode : %.05f calls/sec" % (COUNT / min(timeit.repeat("simplejsonEnc()", "from __main__ import simplejsonEnc", gettime,10, COUNT)), )
     print "yajl  encode      : %.05f calls/sec" % (COUNT / min(timeit.repeat("yajlEnc()", "from __main__ import yajlEnc", gettime, 10, COUNT)), )
 
 decodeData = json.dumps(testObject)
 
-print "ujson decode      : %.05f calls/sec" % (COUNT / min(timeit.repeat("ujsonDec()", "from __main__ import ujsonDec", gettime,10, COUNT)), )
+print "ultrajson decode      : %.05f calls/sec" % (COUNT / min(timeit.repeat("ultrajsonDec()", "from __main__ import ultrajsonDec", gettime,10, COUNT)), )
 if not skip_lib_comparisons:
     print "simplejson decode : %.05f calls/sec" % (COUNT / min(timeit.repeat("simplejsonDec()", "from __main__ import simplejsonDec", gettime,10, COUNT)), )
     print "yajl decode       : %.05f calls/sec" % (COUNT / min(timeit.repeat("yajlDec()", "from __main__ import yajlDec", gettime,10, COUNT)), )
@@ -147,14 +147,14 @@ print "Medium complex object:"
 testObject = [ [user, friends],  [user, friends],  [user, friends],  [user, friends],  [user, friends],  [user, friends]]
 COUNT = 5000
 
-print "ujson encode      : %.05f calls/sec" % (COUNT / min(timeit.repeat("ujsonEnc()", "from __main__ import ujsonEnc", gettime,10, COUNT)), )
+print "ultrajson encode      : %.05f calls/sec" % (COUNT / min(timeit.repeat("ultrajsonEnc()", "from __main__ import ultrajsonEnc", gettime,10, COUNT)), )
 if not skip_lib_comparisons:
     print "simplejson encode : %.05f calls/sec" % (COUNT / min(timeit.repeat("simplejsonEnc()", "from __main__ import simplejsonEnc", gettime,10, COUNT)), )
     print "yajl  encode      : %.05f calls/sec" % (COUNT / min(timeit.repeat("yajlEnc()", "from __main__ import yajlEnc", gettime, 10, COUNT)), )
 
 decodeData = json.dumps(testObject)
 
-print "ujson decode      : %.05f calls/sec" % (COUNT / min(timeit.repeat("ujsonDec()", "from __main__ import ujsonDec", gettime,10, COUNT)), )
+print "ultrajson decode      : %.05f calls/sec" % (COUNT / min(timeit.repeat("ultrajsonDec()", "from __main__ import ultrajsonDec", gettime,10, COUNT)), )
 if not skip_lib_comparisons:
     print "simplejson decode : %.05f calls/sec" % (COUNT / min(timeit.repeat("simplejsonDec()", "from __main__ import simplejsonDec", gettime,10, COUNT)), )
     print "yajl decode       : %.05f calls/sec" % (COUNT / min(timeit.repeat("yajlDec()", "from __main__ import yajlDec", gettime,10, COUNT)), )
@@ -167,13 +167,13 @@ for x in xrange(256):
 
 COUNT = 10000
 
-print "ujson encode      : %.05f calls/sec" % (COUNT / min(timeit.repeat("ujsonEnc()", "from __main__ import ujsonEnc", gettime,10, COUNT)), )
+print "ultrajson encode      : %.05f calls/sec" % (COUNT / min(timeit.repeat("ultrajsonEnc()", "from __main__ import ultrajsonEnc", gettime,10, COUNT)), )
 if not skip_lib_comparisons:
     print "yajl  encode      : %.05f calls/sec" % (COUNT / min(timeit.repeat("yajlEnc()", "from __main__ import yajlEnc", gettime, 10, COUNT)), )
 
 decodeData = json.dumps(testObject)
 
-print "ujson decode      : %.05f calls/sec" % (COUNT / min(timeit.repeat("ujsonDec()", "from __main__ import ujsonDec", gettime,10, COUNT)), )
+print "ultrajson decode      : %.05f calls/sec" % (COUNT / min(timeit.repeat("ultrajsonDec()", "from __main__ import ultrajsonDec", gettime,10, COUNT)), )
 if not skip_lib_comparisons:
     print "simplejson decode : %.05f calls/sec" % (COUNT / min(timeit.repeat("simplejsonDec()", "from __main__ import simplejsonDec", gettime,10, COUNT)), )
     print "yajl decode       : %.05f calls/sec" % (COUNT / min(timeit.repeat("yajlDec()", "from __main__ import yajlDec", gettime,10, COUNT)), )
@@ -187,14 +187,14 @@ for x in xrange(256):
 
 COUNT = 50000
 
-print "ujson encode      : %.05f calls/sec" % (COUNT / min(timeit.repeat("ujsonEnc()", "from __main__ import ujsonEnc", gettime,10, COUNT)), )
+print "ultrajson encode      : %.05f calls/sec" % (COUNT / min(timeit.repeat("ultrajsonEnc()", "from __main__ import ultrajsonEnc", gettime,10, COUNT)), )
 if not skip_lib_comparisons:
     print "simplejson encode : %.05f calls/sec" % (COUNT / min(timeit.repeat("simplejsonEnc()", "from __main__ import simplejsonEnc", gettime,10, COUNT)), )
     print "yajl  encode      : %.05f calls/sec" % (COUNT / min(timeit.repeat("yajlEnc()", "from __main__ import yajlEnc", gettime, 10, COUNT)), )
 
 decodeData = json.dumps(testObject)
 
-print "ujson decode      : %.05f calls/sec" % (COUNT / min(timeit.repeat("ujsonDec()", "from __main__ import ujsonDec", gettime,10, COUNT)), )
+print "ultrajson decode      : %.05f calls/sec" % (COUNT / min(timeit.repeat("ultrajsonDec()", "from __main__ import ultrajsonDec", gettime,10, COUNT)), )
 if not skip_lib_comparisons:
     print "simplejson decode : %.05f calls/sec" % (COUNT / min(timeit.repeat("simplejsonDec()", "from __main__ import simplejsonDec", gettime,10, COUNT)), )
     print "yajl decode       : %.05f calls/sec" % (COUNT / min(timeit.repeat("yajlDec()", "from __main__ import yajlDec", gettime,10, COUNT)), )
@@ -208,14 +208,14 @@ for x in xrange(256):
 
 COUNT = 5000
 
-print "ujson encode      : %.05f calls/sec" % (COUNT / min(timeit.repeat("ujsonEnc()", "from __main__ import ujsonEnc", gettime,10, COUNT)), )
+print "ultrajson encode      : %.05f calls/sec" % (COUNT / min(timeit.repeat("ultrajsonEnc()", "from __main__ import ultrajsonEnc", gettime,10, COUNT)), )
 if not skip_lib_comparisons:
     print "simplejson encode : %.05f calls/sec" % (COUNT / min(timeit.repeat("simplejsonEnc()", "from __main__ import simplejsonEnc", gettime,10, COUNT)), )
     print "yajl  encode      : %.05f calls/sec" % (COUNT / min(timeit.repeat("yajlEnc()", "from __main__ import yajlEnc", gettime, 10, COUNT)), )
 
 decodeData = json.dumps(testObject)
 
-print "ujson decode      : %.05f calls/sec" % (COUNT / min(timeit.repeat("ujsonDec()", "from __main__ import ujsonDec", gettime,10, COUNT)), )
+print "ultrajson decode      : %.05f calls/sec" % (COUNT / min(timeit.repeat("ultrajsonDec()", "from __main__ import ultrajsonDec", gettime,10, COUNT)), )
 if not skip_lib_comparisons:
     print "simplejson decode : %.05f calls/sec" % (COUNT / min(timeit.repeat("simplejsonDec()", "from __main__ import simplejsonDec", gettime,10, COUNT)), )
     print "yajl decode       : %.05f calls/sec" % (COUNT / min(timeit.repeat("yajlDec()", "from __main__ import yajlDec", gettime,10, COUNT)), )
@@ -231,21 +231,21 @@ for y in xrange(256):
 
 COUNT = 50
 
-print "ujson encode      : %.05f calls/sec" % (COUNT / min(timeit.repeat("ujsonEnc()", "from __main__ import ujsonEnc", gettime,10, COUNT)), )
+print "ultrajson encode      : %.05f calls/sec" % (COUNT / min(timeit.repeat("ultrajsonEnc()", "from __main__ import ultrajsonEnc", gettime,10, COUNT)), )
 if not skip_lib_comparisons:
     print "simplejson encode : %.05f calls/sec" % (COUNT / min(timeit.repeat("simplejsonEnc()", "from __main__ import simplejsonEnc", gettime,10, COUNT)), )
     print "yajl  encode      : %.05f calls/sec" % (COUNT / min(timeit.repeat("yajlEnc()", "from __main__ import yajlEnc", gettime, 10, COUNT)), )
 
 decodeData = json.dumps(testObject)
 
-print "ujson decode      : %.05f calls/sec" % (COUNT / min(timeit.repeat("ujsonDec()", "from __main__ import ujsonDec", gettime,10, COUNT)), )
+print "ultrajson decode      : %.05f calls/sec" % (COUNT / min(timeit.repeat("ultrajsonDec()", "from __main__ import ultrajsonDec", gettime,10, COUNT)), )
 if not skip_lib_comparisons:
     print "simplejson decode : %.05f calls/sec" % (COUNT / min(timeit.repeat("simplejsonDec()", "from __main__ import simplejsonDec", gettime,10, COUNT)), )
     print "yajl decode       : %.05f calls/sec" % (COUNT / min(timeit.repeat("yajlDec()", "from __main__ import yajlDec", gettime,10, COUNT)), )
 
 print "Dict with 256 arrays with 256 dict{string, int} pairs, outputting sorted keys:"
 
-print "ujson encode      : %.05f calls/sec" % (COUNT / min(timeit.repeat("ujsonEncSorted()", "from __main__ import ujsonEncSorted", gettime,10, COUNT)), )
+print "ultrajson encode      : %.05f calls/sec" % (COUNT / min(timeit.repeat("ultrajsonEncSorted()", "from __main__ import ultrajsonEncSorted", gettime,10, COUNT)), )
 if not skip_lib_comparisons:
     print "simplejson encode : %.05f calls/sec" % (COUNT / min(timeit.repeat("simplejsonEncSorted()", "from __main__ import simplejsonEncSorted", gettime,10, COUNT)), )
     print "yajl  encode      : %.05f calls/sec" % (COUNT / min(timeit.repeat("yajlEncSorted()", "from __main__ import yajlEncSorted", gettime, 10, COUNT)), )

@@ -27,8 +27,8 @@ try:
 except(OSError):
     pass
 
-module1 = Extension('ujson',
-                    sources = ['./python/ujson.c', 
+module1 = Extension('ultrajson',
+                    sources = ['./python/ultrajson.c',
                                './python/objToJSON.c', 
                                './python/JSONtoObj.c', 
                                './lib/ultrajsonenc.c', 
@@ -45,8 +45,8 @@ def get_version():
     finally:
         if file:
             file.close()
-    m = re.search(r'#define\s+UJSON_VERSION\s+"(\d+\.\d+(?:\.\d+)?)"', header)
-    assert m, "version.h must contain UJSON_VERSION macro"
+    m = re.search(r'#define\s+ultrajson_VERSION\s+"(\d+\.\d+(?:\.\d+)?)"', header)
+    assert m, "version.h must contain ultrajson_VERSION macro"
     return m.group(1)
 
 f = open('README.rst')
@@ -55,14 +55,14 @@ try:
 finally:
     f.close()    
     
-setup (name = 'ujson',
+setup (name = 'ultrajson',
        version = get_version(),
        description = "Ultra fast JSON encoder and decoder for Python",
        long_description = README,
        ext_modules = [module1],
        author="Jonas Tarnstrom",
        author_email="jonas.tarnstrom@esn.me",
-       download_url="http://github.com/esnme/ultrajson",
+       download_url="https://github.com/darthghandi/ultrajson",
        license="BSD License",
        platforms=['any'],      
        url="http://www.esn.me",
