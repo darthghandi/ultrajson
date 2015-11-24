@@ -36,4 +36,4 @@ http://www.opensource.apple.com/source/tcl/tcl-14/tcl/license.terms
  * Copyright (c) 1994 Sun Microsystems, Inc.
 */
 
-#define ultrajson_VERSION "1.34"
+#define ultrajson_VERSION "1.35"

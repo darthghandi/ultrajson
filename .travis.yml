@@ -1,11 +1,20 @@
 sudo: false
 language: python
 python:
-  - "2.6"
-  - "2.7"
-  - "3.3"
-  - "3.4"
+- '2.6'
+- '2.7'
+- '3.3'
+- '3.4'
+- '3.5'
 install:
-  - pip install unittest2
-  - python setup.py install
+- pip install unittest2
+- python setup.py install
 script: python tests/tests.py
+deploy:
+  provider: pypi
+  user: darthghandi
+  password:
+    secure: G9kekLET806LknEsHVdmCl+Xwj/wi5XH4iECls467Kqc/Zq3Kfs0O6lYNHXS1/to1WSXFyANYvc/uBmYXotuffyyZuIfjK++iZjhwBD//o1U3vmKxDJP6kjS/XW7hun86/on2tJuupHHvU+zDLKKsTIesdLx5SqPWaGLycSrnjH/4BFk+rex1qHb0754TOXTU8JdsFZjUEJAlx68tpCf+ABq9vKX0d+hx/p89MrCXB2Q2bLmekXKMpySNixGidHOvvkxKrTDQy1RVjVbntmwvuIqtORYDFKfL/Kqw58bn62QuJ8YMezCD/5gTsrNXEG/XlD3y8Da/hpzbaLpP/rPc3/fZYFFExHdEyHYwBPfVx5zAWYHfq7LwN4hUg2bI+3FS1L5nVJF/qZyDaNnO6wUzbuDxVc5XwR4vj7VjPGjYV1lPBsFQAdCC8aZva+HHjBj1J8qHq+XzvpJFxflxrd2zWIW3n5F2vaP3YedTYm/ZDFdnoO74h7Kp7467sSERDoWyNDDWYK3r+WHxvJar4hAvrbcU74T3dWs2VvN6jq4sQlW/01mPaOb/H7FbeuSGO4vzNdVWIlSI87cFauX4dDhFxTg1JsnXTVjhRLEefb0VxR8l47om0wAoIOLp1UHbG+7DeEPl+5EnNIYdwEaqxZL+KEBEHOqzchkR/bRwj4BXSc=
+  on:
+    tags: true
+    repo: darthghandi/ultrajson
